@@ -33,7 +33,6 @@ function initThemeToggle() {
   if (!themeSwitch) return;
 
   const body = document.body;
-
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     body.classList.add("dark-theme");
@@ -50,6 +49,7 @@ function initThemeToggle() {
     }
   });
 }
+
 function initContactForm() {
   const form = document.querySelector(".contact-form");
   if (!form) return;
@@ -57,26 +57,24 @@ function initContactForm() {
   form.onsubmit = function (e) {
     e.preventDefault();
 
-    const requestType = document.getElementById("requestType").value;
-    const messageText = document.getElementById("message").value.trim();
+    const selectedText = document
+      .getElementById("selectSelected")
+      .textContent.trim();
 
-    if (!requestType) {
+    if (selectedText === "Выберите тип обращения") {
       alert("Пожалуйста, выберите тип обращения.");
       return;
     }
+
+    const messageText = document.getElementById("message").value.trim();
+
     if (!messageText) {
       alert("Пожалуйста, введите текст сообщения.");
       return;
     }
 
-    const recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-      alert("Пожалуйста, подтвердите, что вы не робот.");
-      return;
-    }
-
     const templateParams = {
-      type: requestType,
+      type: selectedText,
       message: messageText,
     };
 
@@ -85,11 +83,15 @@ function initContactForm() {
       .then(() => {
         alert("Сообщение успешно отправлено!");
         document.getElementById("message").value = "";
-        grecaptcha.reset();
+        document.getElementById("selectSelected").textContent =
+          "Выберите тип обращения";
+        document.getElementById("requestType").value = "";
       })
       .catch((error) => {
-        console.error(error);
-        alert("Ошибка при отправке. Попробуйте позже.");
+        console.error("EmailJS error:", error);
+        alert(
+          "Ошибка при отправке. Проверьте настройки EmailJS или попробуйте позже.",
+        );
       });
   };
 }

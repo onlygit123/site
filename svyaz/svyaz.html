@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="svyaz.css" />
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
       (function () {
-        emailjs.init("rHaVu3plUW9Uv117_");
+        emailjs.init("rHaVu3pIUW9Uv117_");
       })();
     </script>
   </head>
@@ -32,7 +33,6 @@
           <input type="checkbox" id="themeSwitch" class="theme-toggle-input" />
           <label for="themeSwitch" class="theme-toggle-label">
             <span class="theme-toggle-circle"></span>
-
             <span class="theme-toggle-icon moon-icon">
               <svg
                 width="16"
@@ -47,7 +47,6 @@
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
               </svg>
             </span>
-
             <span class="theme-toggle-icon sun-icon">
               <svg
                 width="16"
@@ -76,13 +75,7 @@
     </div>
 
     <main class="container">
-      <form
-        class="contact-form"
-        onsubmit="
-          event.preventDefault();
-          alert('Сообщение отправлено!');
-        "
-      >
+      <form class="contact-form">
         <h2>Форма связи</h2>
         <div class="form-group">
           <label for="requestType">Тип обращения:</label>
@@ -128,12 +121,14 @@
             required
           ></textarea>
         </div>
+
         <div class="recaptcha-wrapper">
           <div
             class="g-recaptcha"
             data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
           ></div>
         </div>
+
         <button type="submit" class="submit-btn">Отправить</button>
       </form>
     </main>
