@@ -50,6 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1.4;
+  padding-top: 70px;
 }
 
 * {
@@ -86,9 +87,11 @@ main.container {
 }
 
 .navbar {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   background-color: var(--header-bg);
 }
 
@@ -425,12 +428,285 @@ footer {
   right: 8px;
 }
 
-@media (max-width: 650px) {
-  .contact-form {
-    padding: 24px 20px;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  transition:
+    visibility 0.2s,
+    opacity 0.2s;
+}
+
+.modal-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-container {
+  position: relative;
+  width: 90%;
+  max-width: 500px;
+  max-height: 85vh;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  background: var(--modal-bg, #ffffff);
+  border: 1px solid var(--card-border, #e0e4e8);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--pagination-btn-bg, #f0f0f0);
+  color: var(--text, #1a1a2e);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background: var(--pagination-hover-bg, #bc2420);
+  color: white;
+}
+
+.modal-content {
+  padding: 24px 28px 20px;
+}
+
+.alert-modal-container {
+  max-width: 400px;
+  text-align: center;
+}
+
+.alert-title {
+  color: var(--text);
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.alert-message {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.alert-ok-btn {
+  width: auto;
+  padding: 10px 30px;
+  margin: 0 auto;
+  display: inline-block;
+  font-size: 1rem;
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: 135px;
+    overflow-x: hidden;
   }
+
+  .container {
+    padding: 0 16px;
+  }
+
   .nav-container {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .contact-form {
+    padding: 24px 28px;
+    max-width: 600px;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .logo-and-text {
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .contacts {
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    margin-left: 0;
+  }
+
+  .telephone {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 150px;
+  }
+
+  .container {
+    padding: 0 14px;
+  }
+
+  .nav-container {
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-links a {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+
+  .contact-form {
+    padding: 20px 20px;
+    max-width: 100%;
+  }
+
+  .contact-form h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group textarea,
+  .select-selected {
+    font-size: 0.85rem;
+  }
+
+  .submit-btn {
+    font-size: 0.95rem;
+    padding: 12px 24px;
+  }
+
+  .modal-container {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 140px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .nav-container {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
+
+  main.container {
+    padding: 20px 12px;
+  }
+
+  .contact-form {
+    padding: 16px 16px;
+  }
+
+  .contact-form h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group textarea {
+    min-height: 140px;
+  }
+
+  .select-options li {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 12px 20px;
+  }
+
+  footer {
+    padding: 20px 12px;
+  }
+
+  .contacts {
+    gap: 18px;
+  }
+
+  .telegram,
+  .github {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-container {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .modal-content {
+    padding: 16px 16px 14px;
+  }
+
+  .alert-title {
+    font-size: 1.1rem;
+  }
+
+  .alert-message {
+    font-size: 0.85rem;
   }
 }

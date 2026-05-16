@@ -6,7 +6,6 @@
   font-display: swap;
 }
 
-/* ===== ТЕМЫ ===== */
 :root {
   --bg: #ffffff;
   --text: #1a1a2e;
@@ -53,6 +52,7 @@ body {
   display: flex;
   flex-direction: column;
   line-height: 1.4;
+  padding-top: 70px;
 }
 
 * {
@@ -287,4 +287,145 @@ html::-webkit-scrollbar-thumb {
 }
 .sun-icon {
   right: 8px;
+}
+
+@media (max-width: 992px) {
+  body {
+    padding-top: 135px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .placeholder-text h1 {
+    font-size: 2.8rem;
+  }
+
+  .placeholder-text p {
+    font-size: 1.2rem;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    padding: 24px 16px;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .logo-and-text {
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .contacts {
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    margin-left: 0;
+  }
+
+  .telephone {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 150px;
+  }
+
+  .container {
+    padding: 0 14px;
+  }
+
+  .nav-container {
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-links a {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+  }
+
+  .placeholder-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .placeholder-text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding-top: 140px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .nav-container {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+  }
+
+  .placeholder-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .placeholder-text p {
+    font-size: 0.95rem;
+  }
+
+  .placeholder-text {
+    padding: 20px;
+  }
+
+  footer {
+    padding: 20px 12px;
+  }
+
+  .contacts {
+    gap: 18px;
+  }
+
+  .telegram,
+  .github {
+    width: 40px;
+    height: 40px;
+  }
 }

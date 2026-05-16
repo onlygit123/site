@@ -19,6 +19,16 @@
     </script>
   </head>
   <body>
+    <div id="alertModal" class="modal-overlay">
+      <div class="modal-container alert-modal-container">
+        <button class="modal-close" id="alertModalClose">&times;</button>
+        <div class="modal-content">
+          <h3 id="alertTitle" class="alert-title"></h3>
+          <p id="alertMessage" class="alert-message"></p>
+          <button id="alertOkBtn" class="submit-btn alert-ok-btn">OK</button>
+        </div>
+      </div>
+    </div>
     <div class="navbar">
       <div class="nav-container container">
         <div class="nav-links">
@@ -180,7 +190,6 @@
         >
       </div>
     </footer>
-
     <script src="svyaz.js"></script>
   </body>
 </html>

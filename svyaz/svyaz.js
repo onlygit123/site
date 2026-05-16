@@ -1,3 +1,37 @@
+function showCustomAlert(title, message, onClose) {
+  const modal = document.getElementById("alertModal");
+  const titleEl = document.getElementById("alertTitle");
+  const messageEl = document.getElementById("alertMessage");
+  const okBtn = document.getElementById("alertOkBtn");
+  const closeBtn = document.getElementById("alertModalClose");
+
+  if (!modal || !titleEl || !messageEl || !okBtn || !closeBtn) return;
+
+  titleEl.textContent = title;
+  messageEl.textContent = message;
+  modal.classList.add("active");
+
+  function close() {
+    modal.classList.remove("active");
+    okBtn.removeEventListener("click", close);
+    closeBtn.removeEventListener("click", close);
+    document.removeEventListener("keydown", escHandler);
+    if (onClose) onClose();
+  }
+
+  function escHandler(e) {
+    if (e.key === "Escape") close();
+  }
+
+  okBtn.addEventListener("click", close);
+  closeBtn.addEventListener("click", close);
+  document.addEventListener("keydown", escHandler);
+
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) close();
+  });
+}
+
 function initCustomSelect() {
   const select = document.getElementById("customSelect");
   if (!select) return;
@@ -62,14 +96,14 @@ function initContactForm() {
       .textContent.trim();
 
     if (selectedText === "Выберите тип обращения") {
-      alert("Пожалуйста, выберите тип обращения.");
+      showCustomAlert("Ошибка", "Пожалуйста, выберите тип обращения.");
       return;
     }
 
     const messageText = document.getElementById("message").value.trim();
 
     if (!messageText) {
-      alert("Пожалуйста, введите текст сообщения.");
+      showCustomAlert("Ошибка", "Пожалуйста, введите текст сообщения.");
       return;
     }
 
@@ -81,15 +115,19 @@ function initContactForm() {
     emailjs
       .send("service_vvz8zff", "template_1ftmz7r", templateParams)
       .then(() => {
-        alert("Сообщение успешно отправлено!");
+        showCustomAlert("Успех", "Сообщение успешно отправлено!");
         document.getElementById("message").value = "";
         document.getElementById("selectSelected").textContent =
           "Выберите тип обращения";
         document.getElementById("requestType").value = "";
+        if (typeof grecaptcha !== "undefined" && grecaptcha.reset) {
+          grecaptcha.reset();
+        }
       })
       .catch((error) => {
         console.error("EmailJS error:", error);
-        alert(
+        showCustomAlert(
+          "Ошибка",
           "Ошибка при отправке. Проверьте настройки EmailJS или попробуйте позже.",
         );
       });
